@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alarm.Domain.Alarm
+import com.example.alarm.Domain.Mission
 import kotlinx.android.synthetic.main.alarm_card.view.*
 
 class AlarmRecyclerViewAdapter(
@@ -36,6 +37,10 @@ class AlarmRecyclerViewAdapter(
             itemView.txv_content.text = alarm.description
             itemView.days.text = daysWhenAlarmIsActive(alarm)
             itemView.is_active.isChecked = alarm.isAlarmActive
+            if (alarm.mission == Mission.QR_CODE)
+                itemView.mission.setImageResource(R.drawable.ic_baseline_qr_code_24)
+            else if (alarm.mission == Mission.Steps)
+                itemView.mission.setImageResource(R.drawable.steps)
         }
     }
 
