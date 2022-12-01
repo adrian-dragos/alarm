@@ -2,7 +2,6 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
@@ -26,16 +25,17 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_weight="5"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:padding="4dp"
-                android:text="hello"
-                android:textSize="14sp"
+                android:text="random text"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:checked="true"
@@ -43,18 +43,26 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="7dp"
+            android:background="#FFFFFF" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="35dp"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="75dp">
 
             <ImageView
-                android:layout_margin="12.5dp"
+                android:layout_margin="5dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/steps">
             </ImageView>
+
             <TextView
                 android:id="@+id/txv_content1"
                 android:layout_width="wrap_content"
@@ -62,12 +70,19 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_weight="5"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:padding="4dp"
                 android:text="hello"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_margin="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_baseline_delete_24">
+            </ImageView>
         </LinearLayout>
     </RelativeLayout>
 

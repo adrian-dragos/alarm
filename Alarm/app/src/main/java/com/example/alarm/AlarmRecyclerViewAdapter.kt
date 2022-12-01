@@ -16,7 +16,6 @@ class AlarmRecyclerViewAdapter(
 : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
-       // TODO("Not yet implemented")
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.alarm_card, parent, false)
         return AlarmViewHolder(view);

@@ -21,9 +21,9 @@ class AlarmHomeActivity : AppCompatActivity() {
 
     private fun initList() {
         val alarmList : MutableList<Alarm> = mutableListOf(
-            Alarm("first alarm"),
-            Alarm("second alarm"),
-            Alarm("third alarm")
+            Alarm("7:25"),
+            Alarm("8:40"),
+            Alarm("6:55")
         )
 
         listAdapter = AlarmRecyclerViewAdapter(alarmList.toMutableList())
