@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etx_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        android:hint="placeholder"
+        android:textColor="#F5FBF6"/>
+
+    <Button
+        android:id="@+id/save_alarm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:text="Click To Submit"
+        android:textColor="#F5FBF6"
+        android:background="#B71C1C"
+        android:layout_marginTop="10dp"
+    />
+
+</FrameLayout>
