@@ -108,10 +108,43 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="350dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="22dp"
+            android:text="Mission"
+            android:textColor="#FFFFFF"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="38dp"
+            android:textSize="16dp"
+            android:text="OFF"
+            android:textColor="#FFFFFF"></TextView>
+
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_navigate_next_24"></ImageView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="425dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,32 +154,104 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_baseline_volume_up_24"></ImageView>
 
             <com.google.android.material.slider.Slider
                 android:layout_width="match_parent"
+                android:layout_marginTop="6dp"
                 android:layout_height="10dp"
-                app:labelBehavior="gone"
                 android:scrollbarAlwaysDrawVerticalTrack="false"
                 android:soundEffectsEnabled="false"
                 android:value="100"
                 android:valueFrom="0"
                 android:valueTo="100"
+                app:labelBehavior="gone"
+                app:thumbColor="#009688"
+                app:tickColorInactive="#009688"
                 app:trackColorActive="#009688">
 
             </com.google.android.material.slider.Slider>
         </LinearLayout>
+     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="350dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="22dp"
+            android:text="Mission"
+            android:textColor="#FFFFFF"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="38dp"
+            android:textSize="16dp"
+            android:text="OFF"
+            android:textColor="#FFFFFF"></TextView>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_navigate_next_24"></ImageView>
     </com.google.android.material.card.MaterialCardView>
 
-    <Button
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="490dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="22dp"
+            android:text="Ringtone"
+            android:textColor="#FFFFFF"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="38dp"
+            android:textSize="16dp"
+            android:text="Finding Galaxy"
+            android:textColor="#009688"></TextView>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_navigate_next_24"></ImageView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_alarm_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:background="#B71C1C"
-        android:text="Click To Submit"
-        android:textColor="#F5FBF6" />
+        android:layout_marginBottom="2dp"
+        android:background="#009688"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Save"
+        android:textColor="#F5FBF6"
+        />
 
 </RelativeLayout>
