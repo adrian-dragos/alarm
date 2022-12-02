@@ -26,7 +26,6 @@ class AlarmHomeActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity_view)
 
         fab_add.setOnClickListener { addAlarm() }
-
         val factory = HomeViewModelFactory(AlarmStore(RoomDatabase.getDb(this)))
         viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
@@ -35,25 +34,12 @@ class AlarmHomeActivity : AppCompatActivity() {
     }
 
     private fun initList() {
-        val alarmList : MutableList<Alarm> = mutableListOf(
-            Alarm(1,"-", true, DayOfTheWeek(false, false , true, false, true, false, true), 7, 15, Mission.QR_CODE),
-            Alarm(2,"-", false, DayOfTheWeek(false, false , false, false, false, true, true), 5, 20, Mission.Steps),
-            Alarm(3,"-", true, DayOfTheWeek(true, true , true, true, true, false, false), 6, 30, Mission.QR_CODE),
-            Alarm(4,"-", true, DayOfTheWeek(true, true , true, true, true, true, true), 17, 20, Mission.Steps),
-        )
-
-
-
-//        listAdapter = AlarmRecyclerViewAdapter(alarmList.toMutableList())
-//        alarm_list.adapter = listAdapter
-//        alarm_list.layoutManager = LinearLayoutManager(this)
-
         alarm_list.apply {
             layoutManager = LinearLayoutManager(this@AlarmHomeActivity)
         }
 
         viewModel.alarmsLiveData.observe(this, Observer { alarms ->
-            alarm_list.adapter = AlarmRecyclerViewAdapter(alarms.toMutableList())
+            alarm_list.adapter = AlarmRecyclerViewAdapter(alarms.toMutableList(), { deleteAlarm(it) })
         })
 
         viewModel.retrieveAlarms()
@@ -63,6 +49,10 @@ class AlarmHomeActivity : AppCompatActivity() {
         val intent = Intent(this, AddAlarmActivity::class.java)
 
         startActivityForResult(intent, COMPOSE_REQUEST_CODE)
+    }
+
+    private fun deleteAlarm(id: Long) {
+        viewModel.removeAlarm(id)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

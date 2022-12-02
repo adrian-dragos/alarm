@@ -11,6 +11,6 @@ interface AlarmDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addAlarm(vararg alarm: AlarmEntity)
 
-    @Delete
-    fun removeAlarm(alarm: AlarmEntity)
+    @Query("DELETE FROM alarms WHERE id = :alarmId")
+    fun removeAlarm(alarmId: Long)
 }

@@ -11,8 +11,8 @@ import com.example.alarm.Domain.Mission
 import kotlinx.android.synthetic.main.alarm_card.view.*
 
 class AlarmRecyclerViewAdapter(
-    private val alarmList: MutableList<Alarm>
-//    private val onClick: (Alarm) -> (Unit)
+    private val alarmList: MutableList<Alarm>,
+    private val onDelete: (Long) -> (Unit)
 )
 : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
 
@@ -31,7 +31,9 @@ class AlarmRecyclerViewAdapter(
     }
 
     inner class AlarmViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        init { }
+        init {
+            itemView.fab_delete.setOnClickListener { onDelete(alarmList[adapterPosition].id)}
+        }
 
         fun bind(alarm: Alarm) {
             itemView.alarm_time.text = "" + alarm.hour + ":" + alarm.minute

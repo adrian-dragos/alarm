@@ -13,8 +13,8 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         return appDatabase.alarmDao().addAlarm(toDbModel(alarm))
     }
 
-    override fun removeAlarm(alarm: Alarm) {
-        return appDatabase.alarmDao().removeAlarm(toDbModel(alarm))
+    override fun removeAlarm(alarmId: Long) {
+        return appDatabase.alarmDao().removeAlarm(alarmId)
     }
 
     private fun toDbModel(alarm: Alarm): AlarmEntity {

@@ -18,11 +18,19 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
     fun addAlarm(hour: Int, minute: Int) {
         val id: Long = System.currentTimeMillis();
         val alarm = Alarm(
-            id, "-", true,
+            id, "-",
+            true,
             DayOfTheWeek(true, true, true, true, false, false, false),
-            hour, minute, Mission.Steps
+            hour,
+            minute,
+            Mission.Steps
         )
         alarmRepository.addAlarm(alarm)
+        retrieveAlarms()
+    }
+
+    fun removeAlarm(alarmId: Long) {
+        alarmRepository.removeAlarm(alarmId)
         retrieveAlarms()
     }
 

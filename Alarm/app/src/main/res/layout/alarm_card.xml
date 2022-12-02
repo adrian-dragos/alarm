@@ -80,7 +80,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/delete"
+                android:id="@+id/fab_delete"
                 android:layout_margin="5dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
