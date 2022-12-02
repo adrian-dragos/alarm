@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface AlarmDao {
 
-    @Query("SELECT * FROM alarms")
+    @Query("SELECT * FROM alarms ORDER BY IsActive DESC, hour * 60 + minute ASC")
     fun getAll(): List<AlarmEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -15,6 +15,7 @@ import com.example.alarm.database.RoomDatabase
 import com.example.alarm.view_model.HomeViewModel
 import com.example.alarm.view_model.HomeViewModelFactory
 import kotlinx.android.synthetic.main.main_activity_view.*
+import kotlinx.coroutines.delay
 
 class AlarmHomeActivity : AppCompatActivity() {
 
