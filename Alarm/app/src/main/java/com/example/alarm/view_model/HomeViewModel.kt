@@ -15,12 +15,20 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
         alarmsLiveData.postValue(alarms)
     }
 
-    fun addAlarm(hour: Int, minute: Int) {
+    fun addAlarm(hour: Int, minute: Int, days: BooleanArray?) {
         val id: Long = System.currentTimeMillis();
         val alarm = Alarm(
             id, "-",
             true,
-            DayOfTheWeek(true, true, true, true, false, false, false),
+            DayOfTheWeek(
+                days?.get(0) ?: false,
+                days?.get(1) ?: false,
+                days?.get(2) ?: false,
+                days?.get(3) ?: false,
+                days?.get(4) ?: false,
+                days?.get(5) ?: false,
+                days?.get(6) ?: false
+            ),
             hour,
             minute,
             Mission.Steps

@@ -7,15 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.alarm.Domain.Alarm
-import com.example.alarm.Domain.DayOfTheWeek
-import com.example.alarm.Domain.Mission
 import com.example.alarm.database.AlarmStore
 import com.example.alarm.database.RoomDatabase
 import com.example.alarm.view_model.HomeViewModel
 import com.example.alarm.view_model.HomeViewModelFactory
 import kotlinx.android.synthetic.main.main_activity_view.*
-import kotlinx.coroutines.delay
 
 class AlarmHomeActivity : AppCompatActivity() {
 
@@ -73,7 +69,8 @@ class AlarmHomeActivity : AppCompatActivity() {
         data?.let {
             val hour = data.getIntExtra(AddAlarmActivity.ALARM_HOUR, 0)
             val minute = data.getIntExtra(AddAlarmActivity.ALARM_MINUTE, 0)
-            viewModel.addAlarm(hour, minute)
+            val days = data.getBooleanArrayExtra(AddAlarmActivity.ALARM_DAYS)
+            viewModel.addAlarm(hour, minute, days)
         }
     }
 

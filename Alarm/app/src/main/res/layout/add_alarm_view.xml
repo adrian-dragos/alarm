@@ -55,6 +55,7 @@
                     android:text="Every Day" />
 
                 <CheckBox
+                    android:id="@+id/checkbox_everyday"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="7dp"/>
@@ -66,41 +67,48 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="280dp">
                 <CheckBox
+                    android:id="@+id/checkbox_Sunday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="false"
                     android:text="S"></CheckBox>`
 
                 <CheckBox
+                    android:id="@+id/checkbox_Monday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
                     android:text="M"></CheckBox>
 
                 <CheckBox
+                    android:id="@+id/checkbox_Tuesday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
                     android:text="T"></CheckBox>
 
                 <CheckBox
+                    android:id="@+id/checkbox_Wednesday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
                     android:text="W"></CheckBox>
 
                 <CheckBox
+                    android:id="@+id/checkbox_Thursday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
                     android:text="T"></CheckBox>
 
                 <CheckBox
+                    android:id="@+id/checkbox_Friday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
                     android:text="F"></CheckBox>
                 <CheckBox
+                    android:id="@+id/checkbox_Saturday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:text="S"></CheckBox>

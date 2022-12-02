@@ -67,7 +67,7 @@ class AlarmRecyclerViewAdapter(
         }
         if (alarm.days!!.Thursday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
-            builder.append("Thy")
+            builder.append("Thu")
         }
         if (alarm.days!!.Friday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
