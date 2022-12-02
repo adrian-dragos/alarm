@@ -33,7 +33,9 @@ class AlarmEntity(
     val Sunday: Boolean,
 
     @ColumnInfo(name = "Hour")
-    val Hour: Date,
+    val hour: Int,
+    @ColumnInfo(name = "Minute")
+    val minute: Int,
     @ColumnInfo(name = "Mission")
     val mission: Mission
 ) {}

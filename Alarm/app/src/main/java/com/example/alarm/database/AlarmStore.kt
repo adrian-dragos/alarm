@@ -28,13 +28,14 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         val friday = alarm.days!!.Friday
         val saturday = alarm.days!!.Saturday
         val sunday = alarm.days!!.Sunday
-        val hour = alarm.Hour
+        val hour = alarm.hour
+        val minute = alarm.minute
         val mission = alarm.mission
 
         return AlarmEntity(
             id, description, isActive,
             monday, tuesday, wednesday, thursday, friday, saturday, sunday,
-            hour, mission
+            hour, minute, mission
         );
     }
 
@@ -52,13 +53,14 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
             alarmEntity.Saturday,
             alarmEntity.Sunday
         )
-        val hour = alarmEntity.Hour
+        val hour = alarmEntity.hour
+        val minute = alarmEntity.minute
         val mission = alarmEntity.mission
 
         return Alarm(
             id, description, isAlarmActive,
             days,
-            hour, mission
+            hour, minute, mission
         );
     }
 }

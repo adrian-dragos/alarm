@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.alarm.Domain.Alarm
 import kotlinx.android.synthetic.main.add_alarm_view.*
 
 class AddAlarmActivity : AppCompatActivity() {
@@ -14,10 +15,13 @@ class AddAlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_alarm_view)
 
+        time_picker.setIs24HourView(true);
         save_alarm_button.setOnClickListener {
             val returnIntent = Intent().apply {
-                val content = etx_content.editableText.toString()
-                putExtra(EXTRA_TEXT, content)
+                val hour: Int = time_picker.currentHour
+                val minute: Int = time_picker.currentMinute
+                putExtra(ALARM_HOUR, hour)
+                putExtra(ALARM_MINUTE, minute)
             }
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
@@ -25,7 +29,8 @@ class AddAlarmActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_TEXT = "extra_text"
+        const val ALARM_HOUR = "hour"
+        const val ALARM_MINUTE = "time"
     }
 
 }

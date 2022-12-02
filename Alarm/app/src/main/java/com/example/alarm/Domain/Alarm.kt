@@ -7,6 +7,7 @@ data class Alarm(
     val description: String,
     val isAlarmActive: Boolean,
     val days: DayOfTheWeek?,
-    val Hour: Date,
+    val hour: Int,
+    val minute: Int,
     val mission: Mission
 )

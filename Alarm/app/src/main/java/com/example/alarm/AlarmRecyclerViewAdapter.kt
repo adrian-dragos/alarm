@@ -11,7 +11,7 @@ import com.example.alarm.Domain.Mission
 import kotlinx.android.synthetic.main.alarm_card.view.*
 
 class AlarmRecyclerViewAdapter(
-    private val alarmList: MutableList<Alarm>,
+    private val alarmList: MutableList<Alarm>
 //    private val onClick: (Alarm) -> (Unit)
 )
 : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
@@ -34,7 +34,7 @@ class AlarmRecyclerViewAdapter(
         init { }
 
         fun bind(alarm: Alarm) {
-            itemView.txv_content.text = alarm.description
+            itemView.alarm_time.text = "" + alarm.hour + ":" + alarm.minute
             itemView.days.text = daysWhenAlarmIsActive(alarm)
             itemView.is_active.isChecked = alarm.isAlarmActive
             if (alarm.mission == Mission.QR_CODE)
@@ -45,31 +45,31 @@ class AlarmRecyclerViewAdapter(
     }
 
     private fun daysWhenAlarmIsActive(alarm: Alarm): String {
-        if (alarm.days.Monday && alarm.days.Tuesday && alarm.days.Wednesday
-            && alarm.days.Thursday && alarm.days.Friday && alarm.days.Saturday
-            && alarm.days.Sunday) {
+        if (alarm.days!!.Monday && alarm.days!!.Tuesday && alarm.days!!.Wednesday
+            && alarm.days!!.Thursday && alarm!!.days!!.Friday && alarm.days!!.Saturday
+            && alarm.days!!.Sunday) {
             return "Every Day!"
         }
         val builder = StringBuilder()
-        if (alarm.days.Monday) builder.append("Mo");
+        if (alarm.days!!.Monday) builder.append("Mo");
 
-        if (alarm.days.Tuesday) {
+        if (alarm.days!!.Tuesday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Tue")
         }
-        if (alarm.days.Wednesday) {
+        if (alarm.days!!.Wednesday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Wed")
         }
-        if (alarm.days.Thursday) {
+        if (alarm.days!!.Thursday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Thy")
         }
-        if (alarm.days.Friday) {
+        if (alarm.days!!.Friday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Fri")
         }
-        if (alarm.days.Saturday) {
+        if (alarm.days!!.Saturday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Sat")
         }

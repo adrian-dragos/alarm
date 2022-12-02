@@ -3,7 +3,7 @@ package com.example.alarm.database
 import android.content.Context
 import androidx.room.Room
 
-class RoomDatabase {
+object RoomDatabase {
     private var appDatabase: AppDatabase? = null
 
     fun getDb(context: Context): AppDatabase {
