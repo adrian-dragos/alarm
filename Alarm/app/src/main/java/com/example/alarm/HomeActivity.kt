@@ -39,8 +39,10 @@ class AlarmHomeActivity : AppCompatActivity() {
         }
 
         viewModel.alarmsLiveData.observe(this, Observer { alarms ->
-            alarm_list.adapter = AlarmRecyclerViewAdapter(alarms.toMutableList(), { deleteAlarm(it) })
-        })
+            alarm_list.adapter = AlarmRecyclerViewAdapter(
+                alarms.toMutableList(),
+                { deleteAlarm(it) },
+                { updateIsAlarmActive(it.id, !it.isAlarmActive)})})
 
         viewModel.retrieveAlarms()
     }
@@ -53,6 +55,10 @@ class AlarmHomeActivity : AppCompatActivity() {
 
     private fun deleteAlarm(id: Long) {
         viewModel.removeAlarm(id)
+    }
+
+    private fun updateIsAlarmActive(id: Long, isActive: Boolean) {
+        viewModel.updateIsAlarmActive(id, isActive)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

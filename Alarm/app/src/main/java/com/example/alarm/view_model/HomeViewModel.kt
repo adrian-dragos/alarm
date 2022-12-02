@@ -34,4 +34,9 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
         retrieveAlarms()
     }
 
+    fun updateIsAlarmActive(id: Long, isActive: Boolean) {
+        alarmRepository.updateIsAlarmActive(id, isActive)
+        retrieveAlarms()
+    }
+
 }

@@ -17,6 +17,10 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         return appDatabase.alarmDao().removeAlarm(alarmId)
     }
 
+    override fun updateIsAlarmActive(alarmId: Long, isActive: Boolean) {
+        return appDatabase.alarmDao().updateIsActive(alarmId, isActive)
+    }
+
     private fun toDbModel(alarm: Alarm): AlarmEntity {
         val id = alarm.id
         val description = alarm.description

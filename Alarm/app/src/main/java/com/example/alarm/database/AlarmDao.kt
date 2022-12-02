@@ -13,4 +13,7 @@ interface AlarmDao {
 
     @Query("DELETE FROM alarms WHERE id = :alarmId")
     fun removeAlarm(alarmId: Long)
+
+    @Query("UPDATE alarms SET isActive = :isActive WHERE id = :alarmId")
+    fun updateIsActive(alarmId: Long, isActive: Boolean)
 }

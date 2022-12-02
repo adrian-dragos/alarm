@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.alarm_card.view.*
 
 class AlarmRecyclerViewAdapter(
     private val alarmList: MutableList<Alarm>,
-    private val onDelete: (Long) -> (Unit)
+    private val onDelete: (Long) -> (Unit),
+    private val onUpdateIsActive: (Alarm) -> (Unit)
 )
 : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
 
@@ -33,12 +34,13 @@ class AlarmRecyclerViewAdapter(
     inner class AlarmViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         init {
             itemView.fab_delete.setOnClickListener { onDelete(alarmList[adapterPosition].id)}
+            itemView.fab_switch.setOnClickListener { onUpdateIsActive(alarmList[adapterPosition]) }
         }
 
         fun bind(alarm: Alarm) {
-            itemView.alarm_time.text = "" + alarm.hour + ":" + alarm.minute
+            itemView.alarm_time.text = String.format("%02d:%02d", alarm.hour, alarm.minute)
             itemView.days.text = daysWhenAlarmIsActive(alarm)
-            itemView.is_active.isChecked = alarm.isAlarmActive
+            itemView.fab_switch.isChecked = alarm.isAlarmActive
             if (alarm.mission == Mission.QR_CODE)
                 itemView.mission.setImageResource(R.drawable.ic_baseline_qr_code_24)
             else if (alarm.mission == Mission.Steps)
