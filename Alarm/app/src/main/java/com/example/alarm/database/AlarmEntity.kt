@@ -1,5 +1,6 @@
 package com.example.alarm.database
 
+import android.media.VolumeAutomation
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -37,5 +38,7 @@ class AlarmEntity(
     @ColumnInfo(name = "Minute")
     val minute: Int,
     @ColumnInfo(name = "Mission")
-    val mission: Mission
+    val mission: Mission,
+    @ColumnInfo(name = "MusicVolume")
+    val alarmVolume: Int
 ) {}

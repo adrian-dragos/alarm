@@ -31,7 +31,8 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
             ),
             hour,
             minute,
-            Mission.Steps
+            Mission.Steps,
+            100
         )
         alarmRepository.addAlarm(alarm)
         retrieveAlarms()
@@ -63,7 +64,8 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
             ),
             hour,
             minute,
-            Mission.Steps
+            Mission.Steps,
+            100
         )
         alarmRepository.updateAlarm(alarm)
         retrieveAlarms()
