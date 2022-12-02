@@ -7,9 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.alarm.Domain.Alarm
 import com.example.alarm.database.AlarmStore
 import com.example.alarm.database.RoomDatabase
-import com.example.alarm.view.AddAlarmActivity
+import com.example.alarm.view.ShowAddUpdateAlarmActivity
 import com.example.alarm.view.AlarmRecyclerViewAdapter
 import com.example.alarm.view_model.HomeViewModel
 import com.example.alarm.view_model.HomeViewModelFactory
@@ -41,15 +42,37 @@ class AlarmHomeActivity : AppCompatActivity() {
             alarm_list.adapter = AlarmRecyclerViewAdapter(
                 alarms.toMutableList(),
                 { deleteAlarm(it) },
-                { updateIsAlarmActive(it.id, !it.isAlarmActive)})
+                { updateIsAlarmActive(it.id, !it.isAlarmActive)},
+                { showAlarm(it)})
         })
 
         viewModel.retrieveAlarms()
     }
 
     private fun addAlarm() {
-        val intent = Intent(this, AddAlarmActivity::class.java)
+        val intent = Intent(this, ShowAddUpdateAlarmActivity::class.java)
 
+        startActivityForResult(intent, COMPOSE_REQUEST_CODE)
+    }
+
+    private fun showAlarm(alarm: Alarm) {
+
+        val intent = Intent(this, ShowAddUpdateAlarmActivity::class.java).apply {
+            putExtra(ShowAddUpdateAlarmActivity.ALARM_ID, alarm.id)
+            putExtra(ShowAddUpdateAlarmActivity.IS_ALARM_ACTIVE, alarm.isAlarmActive)
+            putExtra(ShowAddUpdateAlarmActivity.ALARM_HOUR, alarm.hour)
+            putExtra(ShowAddUpdateAlarmActivity.ALARM_MINUTE, alarm.minute)
+            putExtra(
+                ShowAddUpdateAlarmActivity.ALARM_DAYS, booleanArrayOf(
+                    alarm.days!!.Monday,
+                    alarm.days.Tuesday,
+                    alarm.days.Wednesday,
+                    alarm.days.Thursday,
+                    alarm.days.Friday,
+                    alarm.days.Saturday,
+                    alarm.days.Sunday
+                ))
+        }
         startActivityForResult(intent, COMPOSE_REQUEST_CODE)
     }
 
@@ -70,10 +93,17 @@ class AlarmHomeActivity : AppCompatActivity() {
 
     private fun extractAlarm(data: Intent?) {
         data?.let {
-            val hour = data.getIntExtra(AddAlarmActivity.ALARM_HOUR, 0)
-            val minute = data.getIntExtra(AddAlarmActivity.ALARM_MINUTE, 0)
-            val days = data.getBooleanArrayExtra(AddAlarmActivity.ALARM_DAYS)
-            viewModel.addAlarm(hour, minute, days)
+            val hour = data.getIntExtra(ShowAddUpdateAlarmActivity.ALARM_HOUR, 0)
+            val minute = data.getIntExtra(ShowAddUpdateAlarmActivity.ALARM_MINUTE, 0)
+            val days = data.getBooleanArrayExtra(ShowAddUpdateAlarmActivity.ALARM_DAYS)
+            val isActive = data.getBooleanExtra(ShowAddUpdateAlarmActivity.IS_ALARM_ACTIVE, false)
+
+            var alarmId: Long = data.getLongExtra(ShowAddUpdateAlarmActivity.ALARM_ID, 0)
+            if (alarmId != 0L) {
+                viewModel.updateAlarm(alarmId, hour, minute, days, isActive)
+            } else {
+                viewModel.addAlarm(hour, minute, days)
+            }
         }
     }
 

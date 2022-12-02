@@ -5,4 +5,5 @@ interface AlarmRepository {
     fun addAlarm(alarm: Alarm)
     fun removeAlarm(alarmId: Long)
     fun updateIsAlarmActive(alarmId: Long, isActive: Boolean)
+    fun updateAlarm(alarm: Alarm)
 }

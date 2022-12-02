@@ -47,4 +47,26 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
         retrieveAlarms()
     }
 
+
+    fun updateAlarm(alarmId: Long, hour: Int, minute: Int, days: BooleanArray?, isActive: Boolean) {
+        val alarm = Alarm(
+            alarmId, "-",
+            isActive,
+            DayOfTheWeek(
+                days?.get(0) ?: false,
+                days?.get(1) ?: false,
+                days?.get(2) ?: false,
+                days?.get(3) ?: false,
+                days?.get(4) ?: false,
+                days?.get(5) ?: false,
+                days?.get(6) ?: false
+            ),
+            hour,
+            minute,
+            Mission.Steps
+        )
+        alarmRepository.updateAlarm(alarm)
+        retrieveAlarms()
+    }
+
 }

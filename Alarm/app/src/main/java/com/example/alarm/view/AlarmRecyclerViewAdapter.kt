@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.alarm_card.view.*
 class AlarmRecyclerViewAdapter(
     private val alarmList: MutableList<Alarm>,
     private val onDelete: (Long) -> (Unit),
-    private val onUpdateIsActive: (Alarm) -> (Unit)
+    private val onUpdateIsActive: (Alarm) -> (Unit),
+    private val onCardClick: (Alarm) -> Unit
 )
 : RecyclerView.Adapter<AlarmRecyclerViewAdapter.AlarmViewHolder>() {
 
@@ -34,6 +35,7 @@ class AlarmRecyclerViewAdapter(
         init {
             itemView.fab_delete.setOnClickListener { onDelete(alarmList[adapterPosition].id)}
             itemView.fab_switch.setOnClickListener { onUpdateIsActive(alarmList[adapterPosition]) }
+            itemView.card_alarm.setOnClickListener { onCardClick(alarmList[adapterPosition]) }
         }
 
         fun bind(alarm: Alarm) {
