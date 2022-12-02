@@ -258,8 +258,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="2dp"
         android:background="#009688"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="26dp"
         android:text="Save"
         android:textColor="#F5FBF6"
         />

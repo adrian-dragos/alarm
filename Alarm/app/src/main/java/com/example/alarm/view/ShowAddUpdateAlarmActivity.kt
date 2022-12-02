@@ -101,7 +101,7 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         ) {
             save_alarm_button.isEnabled = true
             save_alarm_button.isClickable = true
-            save_alarm_button.setBackgroundColor(ContextCompat.getColor(this, R.color.teal_200))
+            save_alarm_button.setBackgroundColor(ContextCompat.getColor(this, R.color.custom_green))
         } else {
             save_alarm_button.isEnabled = false
             save_alarm_button.isClickable = false
