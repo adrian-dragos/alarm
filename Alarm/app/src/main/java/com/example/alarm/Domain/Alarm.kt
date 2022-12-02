@@ -1,3 +1,13 @@
 package com.example.alarm.Domain
 
-data class Alarm(val description : String)
+import java.util.Date
+
+data class Alarm(
+    val id: Long,
+    val description: String,
+    val isAlarmActive: Boolean,
+    val days: DayOfTheWeek?,
+    val hour: Int,
+    val minute: Int,
+    val mission: Mission
+)

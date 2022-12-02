@@ -19,7 +19,7 @@
             android:layout_marginStart="0dp">
 
             <TextView
-                android:id="@+id/txv_content"
+                android:id="@+id/alarm_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
@@ -33,6 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/fab_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -57,6 +58,7 @@
             android:layout_marginTop="75dp">
 
             <ImageView
+                android:id="@+id/mission"
                 android:layout_margin="5dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -64,7 +66,7 @@
             </ImageView>
 
             <TextView
-                android:id="@+id/txv_content1"
+                android:id="@+id/days"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
@@ -78,6 +80,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/fab_delete"
                 android:layout_margin="5dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
