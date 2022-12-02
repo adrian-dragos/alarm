@@ -1,6 +1,7 @@
 package com.example.alarm.database
 
 import androidx.room.*
+import com.example.alarm.Domain.Alarm
 
 @Dao
 interface AlarmDao {
@@ -16,4 +17,7 @@ interface AlarmDao {
 
     @Query("UPDATE alarms SET isActive = :isActive WHERE id = :alarmId")
     fun updateIsActive(alarmId: Long, isActive: Boolean)
+
+    @Update
+    fun updateAlarm(alarmEntity: AlarmEntity)
 }
