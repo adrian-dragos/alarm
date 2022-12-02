@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.alarm.AlarmHomeActivity
+import androidx.core.content.ContextCompat
 import com.example.alarm.R
 import kotlinx.android.synthetic.main.add_alarm_view.*
 
@@ -20,7 +20,6 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         if (selectedAlarmId != 0L) {
             populateView(intent)
         }
-
 
         save_alarm_button.setOnClickListener {
             val returnIntent = Intent().apply {
@@ -48,13 +47,13 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         checkbox_everyday.setOnClickListener {
             everyDayIsClicked()
         }
-        checkbox_Monday.setOnClickListener{ shouldEveryDayCheckBoxBeChecked() }
-        checkbox_Tuesday.setOnClickListener { shouldEveryDayCheckBoxBeChecked() }
-        checkbox_Wednesday.setOnClickListener{ shouldEveryDayCheckBoxBeChecked() }
-        checkbox_Thursday.setOnClickListener{ shouldEveryDayCheckBoxBeChecked() }
-        checkbox_Friday.setOnClickListener { shouldEveryDayCheckBoxBeChecked() }
-        checkbox_Saturday.setOnClickListener{ shouldEveryDayCheckBoxBeChecked() }
-        checkbox_Sunday.setOnClickListener{ shouldEveryDayCheckBoxBeChecked() }
+        checkbox_Monday.setOnClickListener{ shouldEveryDayCheckBoxBeCheckedAndButtonState() }
+        checkbox_Tuesday.setOnClickListener { shouldEveryDayCheckBoxBeCheckedAndButtonState() }
+        checkbox_Wednesday.setOnClickListener{ shouldEveryDayCheckBoxBeCheckedAndButtonState() }
+        checkbox_Thursday.setOnClickListener{ shouldEveryDayCheckBoxBeCheckedAndButtonState() }
+        checkbox_Friday.setOnClickListener { shouldEveryDayCheckBoxBeCheckedAndButtonState() }
+        checkbox_Saturday.setOnClickListener{ shouldEveryDayCheckBoxBeCheckedAndButtonState() }
+        checkbox_Sunday.setOnClickListener{ shouldEveryDayCheckBoxBeCheckedAndButtonState() }
     }
 
     private fun everyDayIsClicked() {
@@ -75,9 +74,11 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
             checkbox_Saturday.isChecked = false
             checkbox_Sunday.isChecked = false
         }
+
+        enableSaveButton()
     }
 
-    private fun shouldEveryDayCheckBoxBeChecked() {
+    private fun shouldEveryDayCheckBoxBeCheckedAndButtonState() {
         if (checkbox_everyday.isChecked) {
             checkbox_everyday.isChecked = false
         }
@@ -87,6 +88,24 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
             checkbox_Thursday.isChecked && checkbox_Friday.isChecked &&
             checkbox_Saturday.isChecked && checkbox_Sunday.isChecked) {
             checkbox_everyday.isChecked = true
+        }
+
+        enableSaveButton()
+    }
+
+    private fun enableSaveButton() {
+        if (checkbox_Monday.isChecked ||
+            checkbox_Tuesday.isChecked || checkbox_Wednesday.isChecked ||
+            checkbox_Thursday.isChecked || checkbox_Friday.isChecked ||
+            checkbox_Saturday.isChecked || checkbox_Sunday.isChecked
+        ) {
+            save_alarm_button.isEnabled = true
+            save_alarm_button.isClickable = true
+            save_alarm_button.setBackgroundColor(ContextCompat.getColor(this, R.color.teal_200))
+        } else {
+            save_alarm_button.isEnabled = false
+            save_alarm_button.isClickable = false
+            save_alarm_button.setBackgroundColor(ContextCompat.getColor(this, R.color.grey))
         }
     }
 
@@ -105,7 +124,7 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         checkbox_Saturday.isChecked = days?.get(5) ?: false
         checkbox_Sunday.isChecked = days?.get(6) ?: false
 
-        shouldEveryDayCheckBoxBeChecked()
+        shouldEveryDayCheckBoxBeCheckedAndButtonState()
     }
 
     companion object {
