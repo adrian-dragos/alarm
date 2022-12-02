@@ -1,13 +1,10 @@
-package com.example.alarm
+package com.example.alarm.view
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.alarm.Domain.Alarm
+import com.example.alarm.R
 import kotlinx.android.synthetic.main.add_alarm_view.*
 
 class AddAlarmActivity : AppCompatActivity() {
@@ -22,7 +19,8 @@ class AddAlarmActivity : AppCompatActivity() {
                 val minute: Int = time_picker.currentMinute
                 putExtra(ALARM_HOUR, hour)
                 putExtra(ALARM_MINUTE, minute)
-                putExtra(ALARM_DAYS, booleanArrayOf(
+                putExtra(
+                    ALARM_DAYS, booleanArrayOf(
                     checkbox_Monday.isChecked,
                     checkbox_Tuesday.isChecked,
                     checkbox_Wednesday.isChecked,

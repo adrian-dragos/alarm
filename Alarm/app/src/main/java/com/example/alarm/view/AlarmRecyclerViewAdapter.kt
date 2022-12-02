@@ -1,13 +1,12 @@
-package com.example.alarm
+package com.example.alarm.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alarm.Domain.Alarm
 import com.example.alarm.Domain.Mission
+import com.example.alarm.R
 import kotlinx.android.synthetic.main.alarm_card.view.*
 
 class AlarmRecyclerViewAdapter(
@@ -49,31 +48,31 @@ class AlarmRecyclerViewAdapter(
     }
 
     private fun daysWhenAlarmIsActive(alarm: Alarm): String {
-        if (alarm.days!!.Monday && alarm.days!!.Tuesday && alarm.days!!.Wednesday
-            && alarm.days!!.Thursday && alarm!!.days!!.Friday && alarm.days!!.Saturday
-            && alarm.days!!.Sunday) {
+        if (alarm.days!!.Monday && alarm.days.Tuesday && alarm.days.Wednesday
+            && alarm.days.Thursday && alarm.days.Friday && alarm.days.Saturday
+            && alarm.days.Sunday) {
             return "Every Day!"
         }
         val builder = StringBuilder()
-        if (alarm.days!!.Monday) builder.append("Mo");
+        if (alarm.days.Monday) builder.append("Mo");
 
-        if (alarm.days!!.Tuesday) {
+        if (alarm.days.Tuesday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Tue")
         }
-        if (alarm.days!!.Wednesday) {
+        if (alarm.days.Wednesday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Wed")
         }
-        if (alarm.days!!.Thursday) {
+        if (alarm.days.Thursday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Thu")
         }
-        if (alarm.days!!.Friday) {
+        if (alarm.days.Friday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Fri")
         }
-        if (alarm.days!!.Saturday) {
+        if (alarm.days.Saturday) {
             if (!builder.isNullOrEmpty()) builder.append(", ")
             builder.append("Sat")
         }

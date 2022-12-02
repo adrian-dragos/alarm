@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alarm.database.AlarmStore
 import com.example.alarm.database.RoomDatabase
+import com.example.alarm.view.AddAlarmActivity
+import com.example.alarm.view.AlarmRecyclerViewAdapter
 import com.example.alarm.view_model.HomeViewModel
 import com.example.alarm.view_model.HomeViewModelFactory
 import kotlinx.android.synthetic.main.main_activity_view.*
@@ -39,7 +41,8 @@ class AlarmHomeActivity : AppCompatActivity() {
             alarm_list.adapter = AlarmRecyclerViewAdapter(
                 alarms.toMutableList(),
                 { deleteAlarm(it) },
-                { updateIsAlarmActive(it.id, !it.isAlarmActive)})})
+                { updateIsAlarmActive(it.id, !it.isAlarmActive)})
+        })
 
         viewModel.retrieveAlarms()
     }
