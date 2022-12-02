@@ -1,12 +1,13 @@
 package com.example.alarm.view
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.alarm.R
+import com.google.android.material.slider.Slider
 import kotlinx.android.synthetic.main.add_alarm_view.*
+import kotlin.math.roundToInt
 
 class ShowAddUpdateAlarmActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,19 +29,15 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
                 putExtra(ALARM_ID, selectedAlarmId)
                 putExtra(ALARM_HOUR, hour)
                 putExtra(ALARM_MINUTE, minute)
-                putExtra(
-                    ALARM_DAYS, booleanArrayOf(
-                    checkbox_Monday.isChecked,
-                    checkbox_Tuesday.isChecked,
-                    checkbox_Wednesday.isChecked,
-                    checkbox_Thursday.isChecked,
-                    checkbox_Friday.isChecked,
-                    checkbox_Saturday.isChecked,
-                    checkbox_Sunday.isChecked
-                ))
+                putExtra(ALARM_DAYS, booleanArrayOf(
+                    checkbox_Monday.isChecked,  checkbox_Tuesday.isChecked,
+                    checkbox_Wednesday.isChecked, checkbox_Thursday.isChecked,
+                    checkbox_Friday.isChecked, checkbox_Saturday.isChecked,
+                    checkbox_Sunday.isChecked))
                 putExtra(IS_ALARM_ACTIVE, isAlarmActive)
+                putExtra(ALARM_VOLUME, sound_slider.value)
             }
-            setResult(Activity.RESULT_OK, returnIntent)
+            setResult(RESULT_OK, returnIntent)
             finish()
         }
 
@@ -54,6 +51,8 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         checkbox_Friday.setOnClickListener { shouldEveryDayCheckBoxBeCheckedAndButtonState() }
         checkbox_Saturday.setOnClickListener{ shouldEveryDayCheckBoxBeCheckedAndButtonState() }
         checkbox_Sunday.setOnClickListener{ shouldEveryDayCheckBoxBeCheckedAndButtonState() }
+        setVolumeListener()
+
     }
 
     private fun everyDayIsClicked() {
@@ -113,6 +112,7 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         val hour = data.getIntExtra(ALARM_HOUR, 0)
         val minute = data.getIntExtra(ALARM_MINUTE, 0)
         val days = data.getBooleanArrayExtra(ALARM_DAYS)
+        val volume = data.getIntExtra(ALARM_VOLUME, 0)
 
         time_picker.currentHour = hour
         time_picker.currentMinute = minute
@@ -124,7 +124,26 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         checkbox_Saturday.isChecked = days?.get(5) ?: false
         checkbox_Sunday.isChecked = days?.get(6) ?: false
 
+        sound_slider.value = volume.toFloat()
         shouldEveryDayCheckBoxBeCheckedAndButtonState()
+        setVolumeIcon(sound_slider)
+    }
+
+    private fun setVolumeListener() {
+        sound_slider.addOnChangeListener(object : Slider.OnChangeListener {
+            override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
+                setVolumeIcon(slider)
+            }
+
+        })
+    }
+
+    private fun setVolumeIcon(slider: Slider) {
+        if (slider.value.roundToInt() == 0) {
+            sound_image.setImageResource(R.drawable.ic_baseline_volume_off_24)
+        } else {
+            sound_image.setImageResource(R.drawable.ic_baseline_volume_up_24)
+        }
     }
 
     companion object {
@@ -133,6 +152,7 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         const val ALARM_MINUTE = "time"
         const val ALARM_DAYS = "days of the week"
         const val IS_ALARM_ACTIVE = "is alarm active"
+        const val ALARM_VOLUME = "alarm volume"
     }
 
 }

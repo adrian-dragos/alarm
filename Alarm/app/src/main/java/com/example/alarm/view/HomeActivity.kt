@@ -15,6 +15,7 @@ import com.example.alarm.view.AlarmRecyclerViewAdapter
 import com.example.alarm.view_model.HomeViewModel
 import com.example.alarm.view_model.HomeViewModelFactory
 import kotlinx.android.synthetic.main.main_activity_view.*
+import kotlin.math.roundToInt
 
 class AlarmHomeActivity : AppCompatActivity() {
 
@@ -64,14 +65,11 @@ class AlarmHomeActivity : AppCompatActivity() {
             putExtra(ShowAddUpdateAlarmActivity.ALARM_MINUTE, alarm.minute)
             putExtra(
                 ShowAddUpdateAlarmActivity.ALARM_DAYS, booleanArrayOf(
-                    alarm.days!!.Monday,
-                    alarm.days.Tuesday,
-                    alarm.days.Wednesday,
-                    alarm.days.Thursday,
-                    alarm.days.Friday,
-                    alarm.days.Saturday,
-                    alarm.days.Sunday
-                ))
+                    alarm.days!!.Monday, alarm.days.Tuesday,
+                    alarm.days.Wednesday, alarm.days.Thursday,
+                    alarm.days.Friday, alarm.days.Saturday,
+                    alarm.days.Sunday))
+            putExtra(ShowAddUpdateAlarmActivity.ALARM_VOLUME, alarm.alarmVolume)
         }
         startActivityForResult(intent, COMPOSE_REQUEST_CODE)
     }
@@ -97,12 +95,13 @@ class AlarmHomeActivity : AppCompatActivity() {
             val minute = data.getIntExtra(ShowAddUpdateAlarmActivity.ALARM_MINUTE, 0)
             val days = data.getBooleanArrayExtra(ShowAddUpdateAlarmActivity.ALARM_DAYS)
             val isActive = data.getBooleanExtra(ShowAddUpdateAlarmActivity.IS_ALARM_ACTIVE, false)
+            val alarmVolume = data.getFloatExtra(ShowAddUpdateAlarmActivity.ALARM_VOLUME, 0F).roundToInt()
 
             var alarmId: Long = data.getLongExtra(ShowAddUpdateAlarmActivity.ALARM_ID, 0)
             if (alarmId != 0L) {
-                viewModel.updateAlarm(alarmId, hour, minute, days, isActive)
+                viewModel.updateAlarm(alarmId, hour, minute, days, isActive, alarmVolume)
             } else {
-                viewModel.addAlarm(hour, minute, days)
+                viewModel.addAlarm(hour, minute, days, alarmVolume)
             }
         }
     }

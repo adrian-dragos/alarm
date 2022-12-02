@@ -66,52 +66,54 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="280dp">
+
                 <CheckBox
                     android:id="@+id/checkbox_Sunday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="false"
-                    android:text="S"></CheckBox>`
+                    android:text="S" />`
 
                 <CheckBox
                     android:id="@+id/checkbox_Monday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
-                    android:text="M"></CheckBox>
+                    android:text="M" />
 
                 <CheckBox
                     android:id="@+id/checkbox_Tuesday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
-                    android:text="T"></CheckBox>
+                    android:text="T" />
 
                 <CheckBox
                     android:id="@+id/checkbox_Wednesday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
-                    android:text="W"></CheckBox>
+                    android:text="W" />
 
                 <CheckBox
                     android:id="@+id/checkbox_Thursday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
-                    android:text="T"></CheckBox>
+                    android:text="T" />
 
                 <CheckBox
                     android:id="@+id/checkbox_Friday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:checked="true"
-                    android:text="F"></CheckBox>
+                    android:text="F" />
+
                 <CheckBox
                     android:id="@+id/checkbox_Saturday"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:text="S"></CheckBox>
+                    android:text="S" />
             </LinearLayout>
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -130,7 +132,7 @@
             android:layout_marginTop="10dp"
             android:textSize="22dp"
             android:text="Mission"
-            android:textColor="#FFFFFF"></TextView>
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,14 +141,14 @@
             android:layout_marginTop="38dp"
             android:textSize="16dp"
             android:text="OFF"
-            android:textColor="#FFFFFF"></TextView>
+            android:textColor="#FFFFFF" />
 
         <ImageView
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginLeft="320dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_navigate_next_24"></ImageView>
+            android:src="@drawable/ic_baseline_navigate_next_24" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -161,21 +163,23 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/sound_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:src="@drawable/ic_baseline_volume_up_24"></ImageView>
+                android:src="@drawable/ic_baseline_volume_up_24" />
 
             <com.google.android.material.slider.Slider
+                android:id="@+id/sound_slider"
                 android:layout_width="match_parent"
                 android:layout_marginTop="6dp"
                 android:layout_height="10dp"
                 android:scrollbarAlwaysDrawVerticalTrack="false"
                 android:soundEffectsEnabled="false"
-                android:value="100"
+                android:value="20"
                 android:valueFrom="0"
-                android:valueTo="100"
+                android:valueTo="20"
                 app:labelBehavior="gone"
                 app:thumbColor="#009688"
                 app:tickColorInactive="#009688"
@@ -199,7 +203,7 @@
             android:layout_marginTop="10dp"
             android:textSize="22dp"
             android:text="Mission"
-            android:textColor="#FFFFFF"></TextView>
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -208,14 +212,14 @@
             android:layout_marginTop="38dp"
             android:textSize="16dp"
             android:text="OFF"
-            android:textColor="#FFFFFF"></TextView>
+            android:textColor="#FFFFFF" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="320dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_navigate_next_24"></ImageView>
+            android:src="@drawable/ic_baseline_navigate_next_24" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -232,7 +236,7 @@
             android:layout_marginTop="10dp"
             android:textSize="22dp"
             android:text="Ringtone"
-            android:textColor="#FFFFFF"></TextView>
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -241,14 +245,14 @@
             android:layout_marginTop="38dp"
             android:textSize="16dp"
             android:text="Finding Galaxy"
-            android:textColor="#009688"></TextView>
+            android:textColor="#009688" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="320dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_navigate_next_24"></ImageView>
+            android:src="@drawable/ic_baseline_navigate_next_24" />
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatButton
