@@ -1,20 +1,27 @@
 package com.example.alarm
 
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
-import androidx.lifecycle.Observer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alarm.Domain.Alarm
 import com.example.alarm.database.AlarmStore
 import com.example.alarm.database.RoomDatabase
-import com.example.alarm.view.ShowAddUpdateAlarmActivity
+import com.example.alarm.utils.AlarmReceiver
 import com.example.alarm.view.AlarmRecyclerViewAdapter
+import com.example.alarm.view.ShowAddUpdateAlarmActivity
 import com.example.alarm.view_model.HomeViewModel
 import com.example.alarm.view_model.HomeViewModelFactory
 import kotlinx.android.synthetic.main.main_activity_view.*
+import java.util.*
+import java.util.Calendar.SECOND
 import kotlin.math.roundToInt
 
 class AlarmHomeActivity : AppCompatActivity() {
@@ -32,6 +39,23 @@ class AlarmHomeActivity : AppCompatActivity() {
 
         initList()
 
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val id = System.currentTimeMillis().toInt()
+        val pendingIntent1 = PendingIntent.getBroadcast(this,
+            id, intent,
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
+        val pendingIntent2 = PendingIntent.getBroadcast(this,
+            id + 1, intent,
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
+        val time1: Calendar = Calendar.getInstance()
+        val time2: Calendar = Calendar.getInstance()
+        time1.add(SECOND, 3)
+        time2.add(SECOND, 5)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time1.timeInMillis, pendingIntent1)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time2.timeInMillis, pendingIntent2)
+//        Log.d("TAG", "$time1 loh")
+//        Log.d("TAG", "$time2 loh")
     }
 
     private fun initList() {
@@ -105,6 +129,7 @@ class AlarmHomeActivity : AppCompatActivity() {
             }
         }
     }
+
 
     companion object {
         const val COMPOSE_REQUEST_CODE = 1213
