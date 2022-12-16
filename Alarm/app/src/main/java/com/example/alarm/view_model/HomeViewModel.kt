@@ -15,7 +15,7 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
         alarmsLiveData.postValue(alarms)
     }
 
-    fun addAlarm(hour: Int, minute: Int, days: BooleanArray?) {
+    fun addAlarm(hour: Int, minute: Int, days: BooleanArray?, alarmVolume: Int) {
         val id: Long = System.currentTimeMillis();
         val alarm = Alarm(
             id, "-",
@@ -31,7 +31,8 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
             ),
             hour,
             minute,
-            Mission.Steps
+            Mission.Steps,
+            alarmVolume
         )
         alarmRepository.addAlarm(alarm)
         retrieveAlarms()
@@ -48,7 +49,7 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
     }
 
 
-    fun updateAlarm(alarmId: Long, hour: Int, minute: Int, days: BooleanArray?, isActive: Boolean) {
+    fun updateAlarm(alarmId: Long, hour: Int, minute: Int, days: BooleanArray?, isActive: Boolean, alarmVolume: Int) {
         val alarm = Alarm(
             alarmId, "-",
             isActive,
@@ -63,7 +64,8 @@ class HomeViewModel(private val alarmRepository: AlarmRepository) : ViewModel() 
             ),
             hour,
             minute,
-            Mission.Steps
+            Mission.Steps,
+            alarmVolume
         )
         alarmRepository.updateAlarm(alarm)
         retrieveAlarms()

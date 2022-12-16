@@ -9,5 +9,6 @@ data class Alarm(
     val days: DayOfTheWeek?,
     val hour: Int,
     val minute: Int,
-    val mission: Mission
+    val mission: Mission,
+    val alarmVolume: Int
 )

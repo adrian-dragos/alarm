@@ -39,11 +39,12 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         val hour = alarm.hour
         val minute = alarm.minute
         val mission = alarm.mission
+        val alarmVolume = alarm.alarmVolume
 
         return AlarmEntity(
             id, description, isActive,
             monday, tuesday, wednesday, thursday, friday, saturday, sunday,
-            hour, minute, mission
+            hour, minute, mission, alarmVolume
         );
     }
 
@@ -64,11 +65,12 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         val hour = alarmEntity.hour
         val minute = alarmEntity.minute
         val mission = alarmEntity.mission
+        val alarmVolume = alarmEntity.alarmVolume
 
         return Alarm(
             id, description, isAlarmActive,
             days,
-            hour, minute, mission
+            hour, minute, mission, alarmVolume
         );
     }
 }
