@@ -1,6 +1,7 @@
 package com.example.alarm.view
 
 
+import com.example.alarm.utils.AudioPlay
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -14,15 +15,11 @@ class AlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.alarm)
 
-        var alarmSound = MediaPlayer.create(this, R.raw.sound)
-        alarmSound.start()
-        alarmSound.isLooping = true
-        cancel_alarm_button.setOnClickListener { cancelAlarm(alarmSound) }
+        AudioPlay.playAudio(this, R.raw.sound1)
+        cancel_alarm_button.setOnClickListener { cancelAlarm() }
     }
 
-    private fun cancelAlarm(alarmSound: MediaPlayer) {
-        alarmSound.isLooping = false
-        alarmSound.stop()
+    private fun cancelAlarm() {
         val intent = Intent(this, QRActivity::class.java)
         startActivity(intent)
     }
