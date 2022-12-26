@@ -21,4 +21,13 @@ object AudioPlay {
         mediaPlayer!!.isLooping = false
         mediaPlayer!!.stop()
     }
+
+    fun muteAudio() {
+        mediaPlayer!!.setVolume(0F, 0F)
+    }
+
+
+    fun unmuteAudio() {
+        mediaPlayer!!.setVolume(1F, 1F)
+    }
 }
