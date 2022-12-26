@@ -3,7 +3,6 @@ package com.example.alarm.view
 
 import com.example.alarm.utils.AudioPlay
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.alarm.R
