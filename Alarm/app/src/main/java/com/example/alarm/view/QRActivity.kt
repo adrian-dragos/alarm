@@ -28,6 +28,7 @@ import java.io.IOException
 
 class QRActivity : AppCompatActivity() {
     private var isSoundOn = true
+    private var numberOfCycles = 0
 
     private val requestCodeCameraPermission = 1001
     private lateinit var cameraSource: CameraSource
@@ -61,7 +62,13 @@ class QRActivity : AppCompatActivity() {
 
     private fun setVolumeIcon() {
         sound_image.setOnClickListener {
-            if (isSoundOn) {
+            if (numberOfCycles >= 3 && isSoundOn) {
+                Toast.makeText(
+                    this@QRActivity,
+                    "Cannot mute alarm anymore!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (isSoundOn) {
                 sound_image.setImageResource(R.drawable.ic_baseline_volume_off_24)
                 isSoundOn = false
                 AudioPlay.muteAudio()
@@ -77,15 +84,21 @@ class QRActivity : AppCompatActivity() {
         progressBar.progressDrawable.setColorFilter(
             Color.LTGRAY, android.graphics.PorterDuff.Mode.SRC_IN)
 
-        progressBar.progress = 30000
-        object : CountDownTimer(30000, 50) {
+        val maxValue: Int = 5000
+        progressBar.max = maxValue
+        progressBar.progress = maxValue
+        object : CountDownTimer(maxValue.toLong(), 50) {
             override fun onTick(millisUntilFinished: Long) {
-                Log.d("TAG", "millisUntilFinished = $millisUntilFinished")
                 progressBar.progress = millisUntilFinished.toInt()
             }
 
             override fun onFinish() {
-                progressBar.progress = 30000
+                numberOfCycles += 1
+                sound_image.setImageResource(R.drawable.ic_baseline_volume_up_24)
+                isSoundOn = true
+                AudioPlay.unmuteAudio()
+                progressBar.progress = maxValue
+                start()
             }
         }.start()
     }
