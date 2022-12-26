@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
 
     <application
         android:allowBackup="true"
@@ -37,6 +42,8 @@
             tools:replace="screenOrientation">
         </activity>
         <activity android:name=".view.QRActivity">
+        </activity>
+        <activity android:name=".view.MissionPassed">
         </activity>
         <receiver
             android:name=".utils.AlarmReceiver"
