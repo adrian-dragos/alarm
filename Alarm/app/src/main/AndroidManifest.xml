@@ -7,6 +7,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
 
 
     <application
@@ -44,6 +45,8 @@
         <activity android:name=".view.QRActivity">
         </activity>
         <activity android:name=".view.MissionPassed">
+        </activity>
+        <activity android:name=".view.StepsActivity">
         </activity>
         <receiver
             android:name=".utils.AlarmReceiver"

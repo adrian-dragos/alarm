@@ -27,6 +27,7 @@ import java.io.IOException
 class QRActivity : AppCompatActivity() {
     private var isSoundOn = true
     private var numberOfCycles = 0
+    private lateinit var countDownTimer: CountDownTimer
 
     private val requestCodeCameraPermission = 1001
     private lateinit var cameraSource: CameraSource
@@ -87,7 +88,7 @@ class QRActivity : AppCompatActivity() {
         val maxValue: Int = 30000
         progressBar.max = maxValue
         progressBar.progress = maxValue
-        object : CountDownTimer(maxValue.toLong(), 50) {
+        countDownTimer = object : CountDownTimer(maxValue.toLong(), 50) {
             override fun onTick(millisUntilFinished: Long) {
                 progressBar.progress = millisUntilFinished.toInt()
             }
@@ -170,10 +171,9 @@ class QRActivity : AppCompatActivity() {
                             val intent = Intent(this@QRActivity, MissionPassed::class.java)
                             startActivity(intent)
                         } else {
-                            if (toast != null) {
-                                toast?.cancel()
-                                toast = null
-                            }
+                            numberOfCycles += 1
+                            countDownTimer.cancel()
+                            countDownTimer.start()
                             toast = Toast.makeText(this@QRActivity, "Wrong QR Code", Toast.LENGTH_SHORT)
                             toast?.show()
                         }
