@@ -40,5 +40,10 @@ class AlarmEntity(
     @ColumnInfo(name = "Mission")
     val mission: Mission,
     @ColumnInfo(name = "MusicVolume")
-    val alarmVolume: Int
+    val alarmVolume: Int,
+    @ColumnInfo(name = "StepsCount")
+    val stepsCount: Int,
+    @ColumnInfo(name = "QRCode")
+    val QRCode: String?
+
 ) {}

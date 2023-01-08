@@ -14,12 +14,12 @@ class AlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.alarm)
 
-        AudioPlay.playAudio(this, R.raw.sound1)
+        AudioPlay.playAudio(this, R.raw.sound)
         cancel_alarm_button.setOnClickListener { cancelAlarm() }
     }
 
     private fun cancelAlarm() {
-        val intent = Intent(this, QRActivity::class.java)
+        val intent = Intent(this, StepsActivity::class.java)
         startActivity(intent)
     }
 }

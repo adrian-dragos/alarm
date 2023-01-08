@@ -46,6 +46,8 @@ class AlarmRecyclerViewAdapter(
                 itemView.mission.setImageResource(R.drawable.ic_baseline_qr_code_24)
             else if (alarm.mission == Mission.Steps)
                 itemView.mission.setImageResource(R.drawable.steps)
+            else if (alarm.mission == Mission.None)
+                itemView.mission.setImageResource(R.drawable.ic_baseline_access_alarms_24)
         }
     }
 

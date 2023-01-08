@@ -23,17 +23,22 @@ import com.google.android.gms.vision.Detector.Detections
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import kotlinx.android.synthetic.main.qr.*
-import kotlinx.android.synthetic.main.qr.sound_image
 import java.io.IOException
 
 class QRActivity : AppCompatActivity() {
     private var isSoundOn = true
+    private var numberOfCycles = 0
+    private lateinit var countDownTimer: CountDownTimer
 
     private val requestCodeCameraPermission = 1001
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector
     private var scannedValue = ""
     private lateinit var binding: QrBinding
+
+    override fun onBackPressed() {
+        return
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +49,8 @@ class QRActivity : AppCompatActivity() {
         setVolumeIcon()
         setProgressBar()
 
-
         if (ContextCompat.checkSelfPermission(
-                this@QRActivity, android.Manifest.permission.CAMERA
-            ) != PackageManager.PERMISSION_GRANTED
+                this@QRActivity, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
         ) {
             askForCameraPermission()
         } else {
@@ -61,7 +64,13 @@ class QRActivity : AppCompatActivity() {
 
     private fun setVolumeIcon() {
         sound_image.setOnClickListener {
-            if (isSoundOn) {
+            if (numberOfCycles >= 3 && isSoundOn) {
+                Toast.makeText(
+                    this@QRActivity,
+                    "Cannot mute alarm anymore!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (isSoundOn) {
                 sound_image.setImageResource(R.drawable.ic_baseline_volume_off_24)
                 isSoundOn = false
                 AudioPlay.muteAudio()
@@ -77,21 +86,28 @@ class QRActivity : AppCompatActivity() {
         progressBar.progressDrawable.setColorFilter(
             Color.LTGRAY, android.graphics.PorterDuff.Mode.SRC_IN)
 
-        progressBar.progress = 30000
-        object : CountDownTimer(30000, 50) {
+        val maxValue: Int = 30000
+        progressBar.max = maxValue
+        progressBar.progress = maxValue
+        countDownTimer = object : CountDownTimer(maxValue.toLong(), 50) {
             override fun onTick(millisUntilFinished: Long) {
-                Log.d("TAG", "millisUntilFinished = $millisUntilFinished")
                 progressBar.progress = millisUntilFinished.toInt()
             }
 
             override fun onFinish() {
-                progressBar.progress = 30000
+                numberOfCycles += 1
+                sound_image.setImageResource(R.drawable.ic_baseline_volume_up_24)
+                isSoundOn = true
+                AudioPlay.unmuteAudio()
+                progressBar.progress = maxValue
+                start()
             }
         }.start()
     }
 
 
     private fun setupControls() {
+        var blockRead = false;
         barcodeDetector =
             BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build()
 
@@ -131,6 +147,7 @@ class QRActivity : AppCompatActivity() {
 
 
         barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
+            var toast: Toast? = null
             override fun release() {
                 Toast.makeText(applicationContext, "Scanner has been closed", Toast.LENGTH_SHORT)
                     .show()
@@ -138,27 +155,44 @@ class QRActivity : AppCompatActivity() {
 
             override fun receiveDetections(detections: Detections<Barcode>) {
                 val barcodes = detections.detectedItems
-                var toast: Toast? = null
                 if (barcodes.size() == 1) {
                     scannedValue = barcodes.valueAt(0).rawValue
 
                     runOnUiThread {
-                        cameraSource.stop()
                         if (scannedValue == "http://en.m.wikipedia.org") {
+                            if (toast != null) {
+                                toast?.cancel()
+                            }
                             Toast.makeText(
                                 this@QRActivity,
                                 "Alarm successfully canceled!",
                                 Toast.LENGTH_SHORT
                             ).show()
                             AudioPlay.stopAudio()
+                            cameraSource.stop()
                             val intent = Intent(this@QRActivity, MissionPassed::class.java)
                             startActivity(intent)
                         } else {
-                            if (toast == null) {
-                                Toast.makeText(this@QRActivity, "Wrong QR Code", Toast.LENGTH_SHORT)
-                                    .show()
-                                val intent = Intent(this@QRActivity, AlarmActivity::class.java)
-                                startActivity(intent)
+                            if (!blockRead) {
+                                blockRead = true
+                                numberOfCycles += 1
+                                countDownTimer.cancel()
+                                countDownTimer.start()
+                                toast = Toast.makeText(
+                                    this@QRActivity,
+                                    "Wrong QR Code",
+                                    Toast.LENGTH_SHORT
+                                )
+                                toast?.show()
+
+                                object : CountDownTimer(3000.toLong(), 50) {
+                                    override fun onTick(millisUntilFinished: Long) {
+                                    }
+
+                                    override fun onFinish() {
+                                        blockRead = false
+                                    }
+                                }.start()
                             }
                         }
                     }
