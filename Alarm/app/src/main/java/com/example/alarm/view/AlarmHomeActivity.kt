@@ -39,21 +39,21 @@ class AlarmHomeActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
         initList()
-//
-//        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//        val intent = Intent(this, AlarmReceiver::class.java)
-//        val id = System.currentTimeMillis().toInt()
-//        val pendingIntent1 = PendingIntent.getBroadcast(this,
-//            id, intent,
-//            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
-//        val pendingIntent2 = PendingIntent.getBroadcast(this,
-//            id + 1, intent,
-//            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
-//        val time1: Calendar = Calendar.getInstance()
-//        val time2: Calendar = Calendar.getInstance()
-//        time1.add(SECOND, 1)
-//        time2.add(SECOND, 5)
-//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time1.timeInMillis, pendingIntent1)
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val id = System.currentTimeMillis().toInt()
+        val pendingIntent1 = PendingIntent.getBroadcast(this,
+            id, intent,
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
+        val pendingIntent2 = PendingIntent.getBroadcast(this,
+            id + 1, intent,
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
+        val time1: Calendar = Calendar.getInstance()
+        val time2: Calendar = Calendar.getInstance()
+        time1.add(SECOND, 1)
+        time2.add(SECOND, 5)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time1.timeInMillis, pendingIntent1)
 //        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time2.timeInMillis, pendingIntent2)
 //        Log.d("TAG", "$time1 loh")
 //        Log.d("TAG", "$time2 loh")

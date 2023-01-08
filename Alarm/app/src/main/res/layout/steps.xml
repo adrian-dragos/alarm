@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/steps"
             android:layout_centerHorizontal="true"
-            android:text="0"
+            android:text="30"
             android:textColor="@color/design_default_color_primary"
             android:textSize="35sp" />
 

@@ -19,7 +19,7 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun cancelAlarm() {
-        val intent = Intent(this, QRActivity::class.java)
+        val intent = Intent(this, StepsActivity::class.java)
         startActivity(intent)
     }
 }

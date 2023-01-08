@@ -30,7 +30,7 @@ class StepsActivity : AppCompatActivity(), SensorEventListener {
 
     private var running = false
 
-    private var totalSteps = 0f
+    private var totalSteps = 30f
 
     val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
@@ -74,12 +74,12 @@ class StepsActivity : AppCompatActivity(), SensorEventListener {
         var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
 
         if (running) {
-            totalSteps += event!!.values[0]
+            totalSteps -= event!!.values[0]
             countDownTimer.cancel()
             countDownTimer.start()
             val currentSteps = totalSteps.toInt()
             tv_stepsTaken.text = ("$currentSteps")
-            if (currentSteps == 30) {
+            if (currentSteps == 0) {
                 AudioPlay.stopAudio()
                 val intent = Intent(this@StepsActivity, MissionPassed::class.java)
                 startActivity(intent)
