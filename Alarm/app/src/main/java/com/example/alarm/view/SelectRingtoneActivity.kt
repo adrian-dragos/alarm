@@ -7,6 +7,6 @@ import com.example.alarm.R
 class SelectRingtoneActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.select_mission)
+        setContentView(R.layout.select_ringtone)
     }
 }
