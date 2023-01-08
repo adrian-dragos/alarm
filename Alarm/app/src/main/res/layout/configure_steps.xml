@@ -6,15 +6,69 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="configure steps">
+        android:layout_marginTop="5dp"
+        android:textSize="26sp"
+        android:layout_centerHorizontal="true"
+        android:text="Step">
     </TextView>
-
-    <NumberPicker
-        android:id="@+id/number_picker"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="45dp"
+        android:textSize="14sp"
+        android:layout_centerHorizontal="true"
+        android:text="Hold your device and take as many steps as you set">
+    </TextView>
 
-    </NumberPicker>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:text="Step Count">
+    </TextView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/steps_card"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="140dp">
+
+        <NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="125dp"
+            android:layout_marginTop="20dp">
+        </NumberPicker>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="97dp"
+            android:layout_marginLeft="200dp"
+            android:textSize="18sp"
+            android:text="Steps">
+        </TextView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_steps"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/custom_green"
+        android:textSize="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Save"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_centerInParent="true">
+    </androidx.appcompat.widget.AppCompatButton>
 
 </RelativeLayout>

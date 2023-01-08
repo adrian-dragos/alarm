@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alarm.Domain.Alarm
+import com.example.alarm.Domain.Mission
 import com.example.alarm.database.AlarmStore
 import com.example.alarm.database.RoomDatabase
 import com.example.alarm.utils.AlarmReceiver
@@ -94,6 +95,8 @@ class AlarmHomeActivity : AppCompatActivity() {
                     alarm.days.Friday, alarm.days.Saturday,
                     alarm.days.Sunday))
             putExtra(ShowAddUpdateAlarmActivity.ALARM_VOLUME, alarm.alarmVolume)
+            putExtra(ShowAddUpdateAlarmActivity.ALARM_MISSION, alarm.mission)
+            putExtra(ShowAddUpdateAlarmActivity.STEP_COUNT, alarm.stepsCount)
         }
         startActivityForResult(intent, COMPOSE_REQUEST_CODE)
     }
@@ -123,9 +126,9 @@ class AlarmHomeActivity : AppCompatActivity() {
 
             var alarmId: Long = data.getLongExtra(ShowAddUpdateAlarmActivity.ALARM_ID, 0)
             if (alarmId != 0L) {
-                viewModel.updateAlarm(alarmId, hour, minute, days, isActive, alarmVolume)
+                viewModel.updateAlarm(alarmId, hour, minute, days, isActive, alarmVolume, Mission.None, 12)
             } else {
-                viewModel.addAlarm(hour, minute, days, alarmVolume)
+                viewModel.addAlarm(hour, minute, days, alarmVolume, Mission.None, 123)
             }
         }
     }

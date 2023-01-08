@@ -14,7 +14,7 @@ class AlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.alarm)
 
-        AudioPlay.playAudio(this, R.raw.sound1)
+        AudioPlay.playAudio(this, R.raw.sound)
         cancel_alarm_button.setOnClickListener { cancelAlarm() }
     }
 

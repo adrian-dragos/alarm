@@ -9,6 +9,10 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         return appDatabase.alarmDao().getAll().map { toDomainModel(it) }
     }
 
+    override fun getAlarm(alarmId: Long): Alarm {
+        return toDomainModel(appDatabase.alarmDao().getAlarm(alarmId))
+    }
+
     override fun addAlarm(alarm: Alarm) {
         return appDatabase.alarmDao().addAlarm(toDbModel(alarm))
     }
@@ -40,11 +44,12 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         val minute = alarm.minute
         val mission = alarm.mission
         val alarmVolume = alarm.alarmVolume
+        val stepsCount = alarm.stepsCount
 
         return AlarmEntity(
             id, description, isActive,
             monday, tuesday, wednesday, thursday, friday, saturday, sunday,
-            hour, minute, mission, alarmVolume
+            hour, minute, mission, alarmVolume, stepsCount
         );
     }
 
@@ -66,11 +71,12 @@ class AlarmStore(private val appDatabase: AppDatabase) : AlarmRepository {
         val minute = alarmEntity.minute
         val mission = alarmEntity.mission
         val alarmVolume = alarmEntity.alarmVolume
+        val stepsCount = alarmEntity.stepsCount
 
         return Alarm(
             id, description, isAlarmActive,
             days,
-            hour, minute, mission, alarmVolume
+            hour, minute, mission, alarmVolume, stepsCount
         );
     }
 }

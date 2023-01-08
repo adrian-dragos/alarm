@@ -4,9 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProviders
+import com.example.alarm.AlarmHomeActivity
+import com.example.alarm.Domain.Mission
 import com.example.alarm.R
+import com.example.alarm.database.AlarmStore
+import com.example.alarm.database.RoomDatabase
+import com.example.alarm.view_model.HomeViewModel
+import com.example.alarm.view_model.HomeViewModelFactory
 import com.google.android.material.slider.Slider
 import kotlinx.android.synthetic.main.add_alarm_view.*
+import kotlinx.android.synthetic.main.steps.view.*
 import kotlin.math.roundToInt
 
 class ShowAddUpdateAlarmActivity : AppCompatActivity() {
@@ -17,31 +25,65 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
 
         var data = intent
         var selectedAlarmId: Long = data.getLongExtra(ALARM_ID, 0)
+        var afterSelectingMission = data.getBooleanExtra(IS_SETTING_MISSION, false)
         var isAlarmActive: Boolean = data.getBooleanExtra(IS_ALARM_ACTIVE, false)
-        if (selectedAlarmId != 0L) {
+        var mission: Mission = Mission.None
+
+        if (data.getSerializableExtra(ALARM_MISSION) == Mission.Steps) {
+            mission = Mission.Steps
+        }
+        if (data.getSerializableExtra(ALARM_MISSION) == Mission.QR_CODE) {
+            mission = Mission.QR_CODE
+        }
+
+        val stepsCount = data.getIntExtra(STEP_COUNT, 0)
+        if (selectedAlarmId != 0L || afterSelectingMission) {
             populateView(intent)
         }
 
+        val factory = HomeViewModelFactory(AlarmStore(RoomDatabase.getDb(this)))
+        val viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
+
         save_alarm_button.setOnClickListener {
-            val returnIntent = Intent().apply {
-                val hour: Int = time_picker.currentHour
-                val minute: Int = time_picker.currentMinute
+            val hour: Int = time_picker.currentHour
+            val minute: Int = time_picker.currentMinute
+            val days = booleanArrayOf(
+                checkbox_Monday.isChecked,  checkbox_Tuesday.isChecked,
+                checkbox_Wednesday.isChecked, checkbox_Thursday.isChecked,
+                checkbox_Friday.isChecked, checkbox_Saturday.isChecked,
+                checkbox_Sunday.isChecked)
+            val isActive = isAlarmActive
+            val alarmVolume = sound_slider.value
+            if (selectedAlarmId != 0L) {
+                viewModel.updateAlarm(selectedAlarmId, hour, minute, days, isActive, alarmVolume.toInt(), mission, stepsCount)
+            } else {
+                viewModel.addAlarm(hour, minute, days, alarmVolume.toInt(), mission, stepsCount)
+            }
+            val intent = Intent(this, AlarmHomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        select_mission_card.setOnClickListener {
+            val hour: Int = time_picker.currentHour
+            val minute: Int = time_picker.currentMinute
+            val days = booleanArrayOf(
+                checkbox_Monday.isChecked,  checkbox_Tuesday.isChecked,
+                checkbox_Wednesday.isChecked, checkbox_Thursday.isChecked,
+                checkbox_Friday.isChecked, checkbox_Saturday.isChecked,
+                checkbox_Sunday.isChecked)
+
+            val alarmVolume = sound_slider.value
+            val intent = Intent(this@ShowAddUpdateAlarmActivity, SelectMissionActivity::class.java).apply {
                 putExtra(ALARM_ID, selectedAlarmId)
+
+                putExtra(IS_ALARM_ACTIVE, isAlarmActive)
                 putExtra(ALARM_HOUR, hour)
                 putExtra(ALARM_MINUTE, minute)
-                putExtra(ALARM_DAYS, booleanArrayOf(
-                    checkbox_Monday.isChecked,  checkbox_Tuesday.isChecked,
-                    checkbox_Wednesday.isChecked, checkbox_Thursday.isChecked,
-                    checkbox_Friday.isChecked, checkbox_Saturday.isChecked,
-                    checkbox_Sunday.isChecked))
-                putExtra(IS_ALARM_ACTIVE, isAlarmActive)
-                putExtra(ALARM_VOLUME, sound_slider.value)
+                putExtra(ALARM_DAYS, days)
+                putExtra(ALARM_VOLUME, alarmVolume)
+                putExtra(ALARM_MISSION, mission)
+                putExtra(STEP_COUNT, stepsCount)
             }
-            setResult(RESULT_OK, returnIntent)
-            finish()
-        }
-        select_mission_card.setOnClickListener {
-            val intent = Intent(this@ShowAddUpdateAlarmActivity, SelectMissionActivity::class.java)
             startActivity(intent)
         }
 
@@ -122,6 +164,8 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         val minute = data.getIntExtra(ALARM_MINUTE, 0)
         val days = data.getBooleanArrayExtra(ALARM_DAYS)
         val volume = data.getIntExtra(ALARM_VOLUME, 0)
+        val mission = data.getSerializableExtra(ALARM_MISSION)
+        val stepsCount = data.getIntExtra(STEP_COUNT, 0)
 
         time_picker.currentHour = hour
         time_picker.currentMinute = minute
@@ -134,6 +178,17 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         checkbox_Sunday.isChecked = days?.get(6) ?: false
 
         sound_slider.value = volume.toFloat()
+        if (mission == Mission.Steps) {
+            mission_text.text = "Steps - ${stepsCount}"
+        }
+
+        if (mission == Mission.QR_CODE) {
+            mission_text.text = "QR/Barcode"
+        }
+
+        if (mission == Mission.None) {
+            mission_text.text = "OFF"
+        }
         shouldEveryDayCheckBoxBeCheckedAndButtonState()
         setVolumeIcon(sound_slider)
     }
@@ -162,6 +217,9 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         const val ALARM_DAYS = "days of the week"
         const val IS_ALARM_ACTIVE = "is alarm active"
         const val ALARM_VOLUME = "alarm volume"
+        const val ALARM_MISSION = "alarm mission"
+        const val STEP_COUNT = "STEP COUNT"
+        const val IS_SETTING_MISSION = "is setting mission"
     }
 
 }
