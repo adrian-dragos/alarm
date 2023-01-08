@@ -11,5 +11,6 @@ data class Alarm(
     val minute: Int,
     var mission: Mission,
     val alarmVolume: Int,
-    var stepsCount: Int
+    var stepsCount: Int,
+    var QRCode: String?
 )

@@ -123,12 +123,15 @@ class AlarmHomeActivity : AppCompatActivity() {
             val days = data.getBooleanArrayExtra(ShowAddUpdateAlarmActivity.ALARM_DAYS)
             val isActive = data.getBooleanExtra(ShowAddUpdateAlarmActivity.IS_ALARM_ACTIVE, false)
             val alarmVolume = data.getFloatExtra(ShowAddUpdateAlarmActivity.ALARM_VOLUME, 0F).roundToInt()
+            var QRCode = data.getStringExtra(ShowAddUpdateAlarmActivity.QR_CODE)
+
+
 
             var alarmId: Long = data.getLongExtra(ShowAddUpdateAlarmActivity.ALARM_ID, 0)
             if (alarmId != 0L) {
-                viewModel.updateAlarm(alarmId, hour, minute, days, isActive, alarmVolume, Mission.None, 12)
+                viewModel.updateAlarm(alarmId, hour, minute, days, isActive, alarmVolume, Mission.None, 12, QRCode)
             } else {
-                viewModel.addAlarm(hour, minute, days, alarmVolume, Mission.None, 123)
+                viewModel.addAlarm(hour, minute, days, alarmVolume, Mission.None, 123, QRCode)
             }
         }
     }

@@ -41,6 +41,8 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
             populateView(intent)
         }
 
+        var QRCode = data.getStringExtra(QR_CODE)
+
         val factory = HomeViewModelFactory(AlarmStore(RoomDatabase.getDb(this)))
         val viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
@@ -54,10 +56,12 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
                 checkbox_Sunday.isChecked)
             val isActive = isAlarmActive
             val alarmVolume = sound_slider.value
+
+
             if (selectedAlarmId != 0L) {
-                viewModel.updateAlarm(selectedAlarmId, hour, minute, days, isActive, alarmVolume.toInt(), mission, stepsCount)
+                viewModel.updateAlarm(selectedAlarmId, hour, minute, days, isActive, alarmVolume.toInt(), mission, stepsCount, QRCode)
             } else {
-                viewModel.addAlarm(hour, minute, days, alarmVolume.toInt(), mission, stepsCount)
+                viewModel.addAlarm(hour, minute, days, alarmVolume.toInt(), mission, stepsCount, QRCode)
             }
             val intent = Intent(this, AlarmHomeActivity::class.java)
             startActivity(intent)
@@ -83,6 +87,7 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
                 putExtra(ALARM_VOLUME, alarmVolume)
                 putExtra(ALARM_MISSION, mission)
                 putExtra(STEP_COUNT, stepsCount)
+                putExtra(QR_CODE, QRCode)
             }
             startActivity(intent)
         }
@@ -220,6 +225,7 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
         const val ALARM_MISSION = "alarm mission"
         const val STEP_COUNT = "STEP COUNT"
         const val IS_SETTING_MISSION = "is setting mission"
+        const val QR_CODE = "this is qr code"
     }
 
 }

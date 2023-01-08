@@ -18,6 +18,8 @@ class SelectMissionActivity: AppCompatActivity() {
         val isActive = intent.getBooleanExtra(ShowAddUpdateAlarmActivity.IS_ALARM_ACTIVE, false)
         val alarmVolume = intent.getFloatExtra(ShowAddUpdateAlarmActivity.ALARM_VOLUME, 0F)
         val stepsCount = intent.getIntExtra(ShowAddUpdateAlarmActivity.STEP_COUNT, 0)
+        var QRCode = intent.getStringExtra(ShowAddUpdateAlarmActivity.QR_CODE)
+
 
         steps_card.setOnClickListener {
             val intent = Intent(this@SelectMissionActivity, ConfigureStepMissionActivity::class.java).apply {
@@ -25,8 +27,7 @@ class SelectMissionActivity: AppCompatActivity() {
                 putExtra(ShowAddUpdateAlarmActivity.IS_ALARM_ACTIVE, isActive)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_HOUR, hour)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_MINUTE, minute)
-                putExtra(
-                    ShowAddUpdateAlarmActivity.ALARM_DAYS, days)
+                putExtra(ShowAddUpdateAlarmActivity.ALARM_DAYS, days)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_VOLUME, alarmVolume)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_MISSION, Mission.Steps)
                 putExtra(ShowAddUpdateAlarmActivity.STEP_COUNT, stepsCount)
@@ -40,11 +41,11 @@ class SelectMissionActivity: AppCompatActivity() {
                 putExtra(ShowAddUpdateAlarmActivity.IS_ALARM_ACTIVE, isActive)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_HOUR, hour)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_MINUTE, minute)
-                putExtra(
-                    ShowAddUpdateAlarmActivity.ALARM_DAYS, days)
+                putExtra( ShowAddUpdateAlarmActivity.ALARM_DAYS, days)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_VOLUME, alarmVolume)
                 putExtra(ShowAddUpdateAlarmActivity.ALARM_MISSION, Mission.Steps)
                 putExtra(ShowAddUpdateAlarmActivity.STEP_COUNT, stepsCount)
+                putExtra(ShowAddUpdateAlarmActivity.QR_CODE, QRCode)
             }
             startActivity(intent)
         }
