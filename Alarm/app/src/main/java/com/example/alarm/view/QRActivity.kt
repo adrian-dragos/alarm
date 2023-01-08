@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.SurfaceHolder
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -106,6 +107,7 @@ class QRActivity : AppCompatActivity() {
 
 
     private fun setupControls() {
+        var blockRead = false;
         barcodeDetector =
             BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build()
 
@@ -171,11 +173,27 @@ class QRActivity : AppCompatActivity() {
                             val intent = Intent(this@QRActivity, MissionPassed::class.java)
                             startActivity(intent)
                         } else {
-                            numberOfCycles += 1
-                            countDownTimer.cancel()
-                            countDownTimer.start()
-                            toast = Toast.makeText(this@QRActivity, "Wrong QR Code", Toast.LENGTH_SHORT)
-                            toast?.show()
+                            if (!blockRead) {
+                                blockRead = true
+                                numberOfCycles += 1
+                                countDownTimer.cancel()
+                                countDownTimer.start()
+                                toast = Toast.makeText(
+                                    this@QRActivity,
+                                    "Wrong QR Code",
+                                    Toast.LENGTH_SHORT
+                                )
+                                toast?.show()
+
+                                object : CountDownTimer(3000.toLong(), 50) {
+                                    override fun onTick(millisUntilFinished: Long) {
+                                    }
+
+                                    override fun onFinish() {
+                                        blockRead = false
+                                    }
+                                }.start()
+                            }
                         }
                     }
                 }
