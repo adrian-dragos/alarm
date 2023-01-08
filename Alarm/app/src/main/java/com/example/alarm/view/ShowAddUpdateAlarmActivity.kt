@@ -40,6 +40,15 @@ class ShowAddUpdateAlarmActivity : AppCompatActivity() {
             setResult(RESULT_OK, returnIntent)
             finish()
         }
+        select_mission_card.setOnClickListener {
+            val intent = Intent(this@ShowAddUpdateAlarmActivity, SelectMissionActivity::class.java)
+            startActivity(intent)
+        }
+
+        select_ringtone_card.setOnClickListener {
+            val intent = Intent(this@ShowAddUpdateAlarmActivity, SelectRingtoneActivity::class.java)
+            startActivity(intent)
+        }
 
         checkbox_everyday.setOnClickListener {
             everyDayIsClicked()
