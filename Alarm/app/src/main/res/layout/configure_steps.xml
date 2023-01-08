@@ -7,7 +7,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="configure steps">
-
     </TextView>
+
+    <NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+    </NumberPicker>
 
 </RelativeLayout>
