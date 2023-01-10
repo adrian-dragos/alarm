@@ -51,12 +51,11 @@ class AlarmHomeActivity : AppCompatActivity() {
             PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_MUTABLE)
         val time1: Calendar = Calendar.getInstance()
         val time2: Calendar = Calendar.getInstance()
-        time1.add(SECOND, 1)
-        time2.add(SECOND, 5)
+        time1.add(SECOND, 0)
+        time2.add(SECOND, 20)
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, time1.timeInMillis, pendingIntent1)
-//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time2.timeInMillis, pendingIntent2)
-//        Log.d("TAG", "$time1 loh")
-//        Log.d("TAG", "$time2 loh")
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time2.timeInMillis, pendingIntent2)
+        alarmManager.cancel(pendingIntent2)
     }
 
     private fun initList() {

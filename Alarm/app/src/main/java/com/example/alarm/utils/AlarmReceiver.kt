@@ -8,7 +8,6 @@ import android.util.Log
 class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-//        Log.d("TAG", "ajunge aici")
         val i = Intent()
         i.setClassName("com.example.alarm", "com.example.alarm.view.AlarmActivity")
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
