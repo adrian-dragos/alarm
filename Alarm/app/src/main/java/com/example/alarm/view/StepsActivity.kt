@@ -34,6 +34,10 @@ class StepsActivity : AppCompatActivity(), SensorEventListener {
 
     val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
+    override fun onBackPressed() {
+        return
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.steps)
@@ -163,6 +167,7 @@ class StepsActivity : AppCompatActivity(), SensorEventListener {
                 numberOfCycles += 1
                 sound_image.setImageResource(R.drawable.ic_baseline_volume_up_24)
                 isSoundOn = true
+                totalSteps = 30f
                 AudioPlay.unmuteAudio()
                 progressBar.progress = maxValue
                 start()

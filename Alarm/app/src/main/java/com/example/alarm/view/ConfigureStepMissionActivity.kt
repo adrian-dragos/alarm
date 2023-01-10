@@ -16,11 +16,9 @@ class ConfigureStepMissionActivity: AppCompatActivity() {
         setContentView(R.layout.configure_steps)
 
         configureNumberPicker()
-        var selectedAlarmId: Long = intent.getLongExtra(ShowAddUpdateAlarmActivity.ALARM_ID, 0)
-
 
         save_steps.setOnClickListener() {
-            saveCount(selectedAlarmId)
+            saveCount()
         }
     }
 
@@ -43,7 +41,7 @@ class ConfigureStepMissionActivity: AppCompatActivity() {
 
     }
 
-    private fun saveCount(selectedAlarmId: Long) {
+    private fun saveCount() {
 
         var selectedAlarmId: Long = intent.getLongExtra(ShowAddUpdateAlarmActivity.ALARM_ID, 0)
         val hour = intent.getIntExtra(ShowAddUpdateAlarmActivity.ALARM_HOUR, 0)

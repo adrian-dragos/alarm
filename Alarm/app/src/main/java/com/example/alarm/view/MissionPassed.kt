@@ -14,6 +14,10 @@ class MissionPassed: AppCompatActivity() {
         close_app.setOnClickListener { closeApp() }
     }
 
+    override fun onBackPressed() {
+        return
+    }
+
     private fun closeApp() {
         finishAffinity()
     }
