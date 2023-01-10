@@ -18,8 +18,12 @@ class AlarmActivity : AppCompatActivity() {
         cancel_alarm_button.setOnClickListener { cancelAlarm() }
     }
 
+    override fun onBackPressed() {
+        return
+    }
+
     private fun cancelAlarm() {
-        val intent = Intent(this, QRActivity::class.java)
+        val intent = Intent(this, StepsActivity::class.java)
         startActivity(intent)
     }
 }

@@ -34,6 +34,10 @@ class StepsActivity : AppCompatActivity(), SensorEventListener {
 
     val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
+    override fun onBackPressed() {
+        return
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.steps)
