@@ -53,7 +53,8 @@ class AlarmHomeActivity : AppCompatActivity() {
         val time2: Calendar = Calendar.getInstance()
         time1.add(SECOND, 0)
         time2.add(SECOND, 20)
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, time1.timeInMillis, pendingIntent1)
+        // TODO: Uncomment this line to simulate alarm
+        // alarmManager.setExact(AlarmManager.RTC_WAKEUP, time1.timeInMillis, pendingIntent1)
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, time2.timeInMillis, pendingIntent2)
         alarmManager.cancel(pendingIntent2)
     }
