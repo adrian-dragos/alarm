@@ -23,7 +23,11 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun cancelAlarm() {
-        val intent = Intent(this, StepsActivity::class.java)
-        startActivity(intent)
+        // TODO: uncomment this line to open steps mission
+        //startActivity(Intent(this, StepsActivity::class.java))
+
+
+        // TODO: uncomment this line to open qr scanning mission
+        // startActivity(Intent(this, QRActivity::class.java))
     }
 }
